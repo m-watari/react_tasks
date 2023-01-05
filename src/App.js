@@ -1,8 +1,19 @@
 
 import Todo from "./components/Todo";
+import React, { useState } from 'react';
+
 function App(props) {
-  // console.log('tasks: ', props)
-  // const taskList = props.tasks?.map((task) => task.name);
+  const [tasks, setTasks] = useState(props.tasks);
+
+  function addTask(text) {
+    const i = props.tasks.length;
+    const newTask = { id: "todo-" + i, name: text, completed: false };
+    props.tasks.push(newTask);
+    setTasks([...tasks, newTask]);
+
+    console.log('props.tasks: ', props.tasks)
+  }
+
   const taskList = props.tasks.map((task) => (
     <Todo
       id={task.id}
@@ -14,7 +25,11 @@ function App(props) {
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
-      <form>
+      <form onSubmit={(event) => {
+        event.preventDefault();
+        addTask(event.target.text.value, props);
+        event.target.text.value = '';
+      }}>
         <h2 className="label-wrapper">
           <label htmlFor="new-todo-input" className="label__lg">
             What needs to be done?
