@@ -13,7 +13,7 @@ function App(props) {
 
     console.log('props.tasks: ', props.tasks)
   }
-  const taskList = props.tasks.map((task) => (
+  const taskList = tasks.map((task) => (
     <Todo
       id={task.id}
       name={task.name}
