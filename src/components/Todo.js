@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 function Todo(props) {
   const [tasks, setTasks] = useState(props.tasks);
 
-  const deleteTask = (event) => {
+  async function deleteTask(event){
     // tasksからtasks.idとidが一致するtaskを削除する
-    const newTasks = tasks.filter((task) => task.id !== event.target.id);
-    // setTasks([...tasks, newTasks]);
-    setTasks(newTasks);
+    const newTasks = await tasks.filter((task) => task.id !== event.target.id);
+    // props.tasksをnewTasksに更新する
+    await setTasks(newTasks);
   };
 
   return (
